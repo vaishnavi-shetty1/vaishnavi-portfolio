@@ -1,0 +1,179 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+
+:root {
+  --black:        #0a0a0f;
+  --deep:         #0f0f1a;
+  --surface:      #141428;
+  --card:         #1a1a35;
+  --border:       #2a2a5a;
+  --accent:       #7c3aed;
+  --accent-2:     #c026d3;
+  --neon-cyan:    #00f5ff;
+  --neon-pink:    #ff2d9b;
+  --neon-yellow:  #f5e642;
+  --neon-green:   #39ff14;
+  --text:         #e8e8ff;
+  --text-muted:   #7878aa;
+  --white:        #ffffff;
+
+  --px:           4px;
+
+  --font-pixel:   'Press Start 2P', monospace;
+  --font-vt:      'VT323', monospace;
+  --font-mono:    'Space Mono', monospace;
+
+  --glow-accent:  0 0 8px var(--accent), 0 0 20px var(--accent);
+  --glow-cyan:    0 0 8px var(--neon-cyan), 0 0 20px var(--neon-cyan);
+  --glow-pink:    0 0 8px var(--neon-pink), 0 0 20px var(--neon-pink);
+  --glow-yellow:  0 0 8px var(--neon-yellow), 0 0 20px var(--neon-yellow);
+  --glow-green:   0 0 8px var(--neon-green), 0 0 20px var(--neon-green);
+
+  --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 24px;
+  --s6: 32px; --s7: 48px; --s8: 64px; --s9: 96px;
+
+  /* Z */
+  --z-nav: 100;
+  --z-scanline: 200;
+}
+
+/* ── RESET ───────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--text);
+  font-family: var(--font-mono);
+  line-height: 1.6;
+  cursor: crosshair;
+  overflow-x: hidden;
+}
+
+/* ── SCANLINE OVERLAY ────────────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.08) 2px,
+    rgba(0,0,0,0.08) 4px
+  );
+  pointer-events: none;
+  z-index: var(--z-scanline);
+}
+
+/* ── PIXEL GRID BG ───────────────────────────────────────── */
+.pixel-grid-bg {
+  background-image:
+    linear-gradient(rgba(124,58,237,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(124,58,237,0.06) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* ── TYPOGRAPHY ──────────────────────────────────────────── */
+h1, h2, h3 { font-family: var(--font-pixel); line-height: 1.4; }
+h1 { font-size: clamp(0.9rem, 2vw, 1.4rem); }
+h2 { font-size: clamp(0.75rem, 1.5vw, 1rem); }
+h3 { font-size: clamp(0.6rem, 1.2vw, 0.8rem); }
+
+.vt { font-family: var(--font-vt); font-size: clamp(1.4rem, 3vw, 2.2rem); letter-spacing: 0.05em; }
+.mono { font-family: var(--font-mono); }
+
+/* ── PIXEL BUTTON ────────────────────────────────────────── */
+.btn-pixel {
+  font-family: var(--font-pixel);
+  font-size: 0.55rem;
+  letter-spacing: 0.05em;
+  padding: var(--s2) var(--s4);
+  background: transparent;
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  cursor: pointer;
+  position: relative;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.15s steps(3);
+  image-rendering: pixelated;
+}
+.btn-pixel::before {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  border: 1px solid currentColor;
+  opacity: 0.3;
+}
+.btn-pixel:hover {
+  background: var(--accent);
+  color: var(--white);
+  box-shadow: var(--glow-accent);
+}
+.btn-pixel.cyan  { border-color: var(--neon-cyan);   color: var(--neon-cyan);   }
+.btn-pixel.cyan:hover  { background: var(--neon-cyan);  color: var(--black); box-shadow: var(--glow-cyan); }
+.btn-pixel.pink  { border-color: var(--neon-pink);   color: var(--neon-pink);   }
+.btn-pixel.pink:hover  { background: var(--neon-pink);  color: var(--black); box-shadow: var(--glow-pink); }
+.btn-pixel.green { border-color: var(--neon-green); color: var(--neon-green); }
+.btn-pixel.green:hover { background: var(--neon-green); color: var(--black); box-shadow: var(--glow-green); }
+
+/* ── PIXEL CARD ──────────────────────────────────────────── */
+.card-pixel {
+  background: var(--card);
+  border: 1px solid var(--border);
+  position: relative;
+  padding: var(--s5);
+  transition: transform 0.2s steps(4), box-shadow 0.2s;
+}
+.card-pixel::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+.card-pixel:hover { transform: translate(-4px, -4px); }
+.card-pixel:hover::after { border-color: var(--neon-cyan); box-shadow: var(--glow-cyan); }
+
+/* ── PIXEL DIVIDER ───────────────────────────────────────── */
+.px-divider {
+  border: none;
+  height: 1px;
+  background: repeating-linear-gradient(90deg, var(--border) 0, var(--border) 6px, transparent 6px, transparent 10px);
+  margin: var(--s6) 0;
+}
+
+/* ── NEON TEXT ───────────────────────────────────────────── */
+.neon-cyan   { color: var(--neon-cyan);   text-shadow: var(--glow-cyan); }
+.neon-pink   { color: var(--neon-pink);   text-shadow: var(--glow-pink); }
+.neon-yellow { color: var(--neon-yellow); text-shadow: var(--glow-yellow); }
+.neon-green  { color: var(--neon-green);  text-shadow: var(--glow-green); }
+.neon-accent { color: var(--accent);      text-shadow: var(--glow-accent); }
+
+/* ── BLINK ───────────────────────────────────────────────── */
+@keyframes blink { 0%,49%{opacity:1} 50%,100%{opacity:0} }
+.blink { animation: blink 1s step-end infinite; }
+
+/* ── PIXEL SCROLL ────────────────────────────────────────── */
+::-webkit-scrollbar { width: 8px; background: var(--deep); }
+::-webkit-scrollbar-thumb { background: var(--accent); }
+
+/* ── LINK ────────────────────────────────────────────────── */
+a { color: inherit; text-decoration: none; }
+
+/* ── FADE-IN PAGE ────────────────────────────────────────── */
+@keyframes pageIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
+.page-enter { animation: pageIn 0.4s ease-out; }
+
+/* ── CORNER DECORATION ───────────────────────────────────── */
+.corner-deco {
+  position: relative;
+}
+.corner-deco::before, .corner-deco::after {
+  content: '';
+  position: absolute;
+  width: 12px; height: 12px;
+}
+.corner-deco::before { top: 0; left: 0; border-top: 2px solid var(--neon-cyan); border-left: 2px solid var(--neon-cyan); }
+.corner-deco::after  { bottom: 0; right: 0; border-bottom: 2px solid var(--neon-cyan); border-right: 2px solid var(--neon-cyan); }
