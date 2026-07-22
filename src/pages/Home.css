@@ -233,7 +233,7 @@
 
 .about__text {
   font-family: var(--font-mono);
-  font-size: 0.85rem;
+  font-size: 1.2rem;
   color: var(--text-muted);
   line-height: 1.9;
   margin-bottom: var(--s4);
@@ -280,4 +280,30 @@
   .hero__orbit--1 { width: 240px; height: 240px; }
   .hero__orbit--2 { width: 290px; height: 290px; }
   .about { grid-template-columns: 1fr; padding: var(--s7) var(--s5); }
+}
+
+.avatar-pixel-art text {
+  opacity: 0;
+}
+
+@keyframes floatCode {
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+
+  30% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(-40px);
+    opacity: 0;
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
 }
